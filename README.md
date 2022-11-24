@@ -1,1 +1,1 @@
-"# generate-random-sting-app" 
+"# generate-random-string-app" 
