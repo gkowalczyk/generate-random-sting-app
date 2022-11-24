@@ -46,7 +46,7 @@ java -jar generate-number-app-0.0.1-SNAPSHOT.jar
 ![alt text for image](https://github.com/gkowalczyk/generate-random-sting-app/blob/main/src/main/resources/getall.bmp)
 
 - GET /v1/run   : list of task with status "in progress"
-  ![alt text for image](https://github.com/gkowalczyk/generate-random-sting-app/blob/main/src/main/resources/getrun.bmpp)
+  ![alt text for image](https://github.com/gkowalczyk/generate-random-sting-app/blob/main/src/main/resources/getrun.bmp)
 
 - POST /v1/   : add task (without exception while strings are being generated)
   ![alt text for image](https://github.com/gkowalczyk/generate-random-sting-app/blob/main/src/main/resources/post%20without%20exception.bmp)
