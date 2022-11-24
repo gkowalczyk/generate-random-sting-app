@@ -44,7 +44,8 @@ java -jar generate-number-app-0.0.1-SNAPSHOT.jar
 
 ### Postman tests:
 
-
+- GET /v1/getall   : list of all tasks
+![alt text for image](https://github.com/gkowalczyk/generate-random-sting-app/blob/main/src/main/resources/getall.bmp)
 
 
 
