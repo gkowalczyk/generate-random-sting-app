@@ -39,15 +39,15 @@ docker-compose up -d
 java -jar generate-number-app-0.0.1-SNAPSHOT.jar
 ```
 
-### Endpoints:
 
-
-### Postman tests:
+### Postman Endpoints tests:
 
 - GET /v1/getall   : list of all tasks
 ![alt text for image](https://github.com/gkowalczyk/generate-random-sting-app/blob/main/src/main/resources/getall.bmp)
 
+- GET /v1/run   : list of task with status "in progress"
 
 
+- POST /v1/   : add task 
 
 
