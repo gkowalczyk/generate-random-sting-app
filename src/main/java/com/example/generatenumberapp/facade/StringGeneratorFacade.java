@@ -19,6 +19,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 @Slf4j
 @AllArgsConstructor
@@ -77,8 +81,23 @@ public class StringGeneratorFacade {
         return list;
     }
 
-    @Async("asyncExecutor")
-    @Scheduled(fixedRate = 1000)
+    @Scheduled(fixedRate = 10000)
+    public void execute() throws ExecutionException, InterruptedException {
+        ExecutorService threadpool = Executors.newCachedThreadPool();
+        Future<Long> futureTask = (Future<Long>) threadpool.submit(() -> {
+            try {
+                finalGenerateStringsListTasksWithAsync();
+            } catch (FileWriterException e) {
+                e.printStackTrace();
+            }
+        });
+        while (!futureTask.isDone()) {
+            log.info("FutureTask is not finished yet...");
+        }
+        threadpool.shutdown();
+    }
+
+     //@Async
     public void finalGenerateStringsListTasksWithAsync() throws FileWriterException {
 
         Task optionalTask = taskRepository.findFirstByTaskStatus(TaskStatus.WAITING).orElse(null);
@@ -94,7 +113,6 @@ public class StringGeneratorFacade {
             optionalTask.setTaskStatus(TaskStatus.FINISHED);
             taskRepository.saveAndFlush(optionalTask);
         }
-
         log.info("Async task schedule end");
     }
 }
