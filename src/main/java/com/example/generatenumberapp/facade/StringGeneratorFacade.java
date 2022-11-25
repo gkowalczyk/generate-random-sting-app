@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 @Slf4j
@@ -28,23 +29,6 @@ public class StringGeneratorFacade {
     private final TaskRepository taskRepository;
     private final Random random = new Random();
 
-    @Async("asyncExecutor")
-    @Scheduled(fixedRate = 10000)
-        public void finalGenerateStringsListTasksWithAsync() throws FileWriterException {
-        Task optionalTask = taskRepository.findFirstByTaskStatus(TaskStatus.WAITING).orElse(null);
-        if (optionalTask != null) {
-            optionalTask.setTaskStatus(TaskStatus.INPROGRESS);
-            taskRepository.saveAndFlush(optionalTask);
-            List<String> randomWords = generateStringsList(optionalTask);
-            log.info("Saving file start..............");
-            saveToFile(randomWords);
-            optionalTask.setSaveFileAs(returnMaxLongIdFromDataBase() + ".txt");
-            log.info("Saving file end..............");
-            optionalTask.setTaskStatus(TaskStatus.FINISHED);
-            taskRepository.saveAndFlush(optionalTask);
-        }
-        log.info("Async task schedule end");
-    }
 
     public long returnMaxLongIdFromDataBase() {
         Iterable<Task> taskIterable = taskRepository.findAll();
@@ -63,12 +47,14 @@ public class StringGeneratorFacade {
         try (FileOutputStream fileOutputStream = new FileOutputStream(file)) {
             listOfStrings.forEach(n -> {
                 try {
-                    fileOutputStream.write(n.getBytes(StandardCharsets.UTF_8));
-                    fileOutputStream.write("\n".getBytes(StandardCharsets.UTF_8));
+                    fileOutputStream.write(n.getBytes());
+                    fileOutputStream.write("\n".getBytes());
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             });
+            fileOutputStream.flush();
         } catch (IOException e) {
             throw new FileWriterException();
         }
@@ -89,5 +75,26 @@ public class StringGeneratorFacade {
             list.add(string.toString());
         }
         return list;
+    }
+
+    @Async("asyncExecutor")
+    @Scheduled(fixedRate = 1000)
+    public void finalGenerateStringsListTasksWithAsync() throws FileWriterException {
+
+        Task optionalTask = taskRepository.findFirstByTaskStatus(TaskStatus.WAITING).orElse(null);
+        if (Objects.nonNull(optionalTask)) {
+            log.info("Processing..........................");
+            optionalTask.setTaskStatus(TaskStatus.INPROGRESS);
+            taskRepository.saveAndFlush(optionalTask);
+            List<String> randomWords = generateStringsList(optionalTask);
+            log.info("Saving file start..............");
+            saveToFile(randomWords);
+            optionalTask.setSaveFileAs(returnMaxLongIdFromDataBase() + ".txt");
+            log.info("Saving file end..............");
+            optionalTask.setTaskStatus(TaskStatus.FINISHED);
+            taskRepository.saveAndFlush(optionalTask);
+        }
+
+        log.info("Async task schedule end");
     }
 }

@@ -12,6 +12,7 @@ import java.util.Optional;
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Long> {
 
+
     Optional<Task> findFirstByTaskStatus(TaskStatus taskStatus);
 
     @Query(" SELECT t FROM Task t WHERE taskStatus = 1")

@@ -36,6 +36,7 @@ public class TaskService {
     }
 
     public Task addTask(Task task) throws PermutationException {
+
         if (CalculateCombinations.howManyCombinations(task.getCharStrings().length()) < task.getAmount()) {
             throw new PermutationException("GlobalHttpErrorHandler");
         }
