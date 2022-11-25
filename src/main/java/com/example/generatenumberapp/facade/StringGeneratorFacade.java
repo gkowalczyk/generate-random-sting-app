@@ -7,14 +7,11 @@ import com.example.generatenumberapp.repository.TaskRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -33,6 +30,24 @@ public class StringGeneratorFacade {
     private final TaskRepository taskRepository;
     private final Random random = new Random();
 
+
+    @Scheduled(fixedRate = 10000)
+    public void execute() throws ExecutionException, InterruptedException {
+        ExecutorService threadpool = Executors.newCachedThreadPool();
+        Future<Long> futureTask;
+        futureTask = (Future<Long>) threadpool.submit(() -> {
+            try {
+                finalGenerateStringsListTasksWithAsync();
+            } catch (FileWriterException e) {
+                e.printStackTrace();
+            }
+        });
+        while (!futureTask.isDone()) {
+            log.info("FutureTask is not finished yet...");
+           log.info(String.valueOf(futureTask.get()));
+        }
+        threadpool.shutdown();
+    }
 
     public long returnMaxLongIdFromDataBase() {
         Iterable<Task> taskIterable = taskRepository.findAll();
@@ -80,23 +95,6 @@ public class StringGeneratorFacade {
         }
         return list;
     }
-
-    @Scheduled(fixedRate = 10000)
-    public void execute() throws ExecutionException, InterruptedException {
-        ExecutorService threadpool = Executors.newCachedThreadPool();
-        Future<Long> futureTask = (Future<Long>) threadpool.submit(() -> {
-            try {
-                finalGenerateStringsListTasksWithAsync();
-            } catch (FileWriterException e) {
-                e.printStackTrace();
-            }
-        });
-        while (!futureTask.isDone()) {
-            log.info("FutureTask is not finished yet...");
-        }
-        threadpool.shutdown();
-    }
-
      //@Async
     public void finalGenerateStringsListTasksWithAsync() throws FileWriterException {
 
