@@ -19,7 +19,6 @@ public class Task {
     private String charStrings;
     private long amount;
     private String saveFileAs;
-    @Enumerated
     private TaskStatus taskStatus;
 
     public Task(long min, long max, String charStrings, long amount) {
