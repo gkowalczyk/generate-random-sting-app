@@ -7,6 +7,7 @@ import com.example.generatenumberapp.repository.TaskRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import java.io.File;
@@ -31,7 +32,7 @@ public class StringGeneratorFacade {
     private final Random random = new Random();
 
 
-    @Scheduled(fixedRate = 10000)
+   /* @Scheduled(fixedRate = 10000)
     public void execute() throws ExecutionException, InterruptedException {
         ExecutorService threadpool = Executors.newCachedThreadPool();
         Future<Long> futureTask;
@@ -44,10 +45,10 @@ public class StringGeneratorFacade {
         });
         while (!futureTask.isDone()) {
             log.info("FutureTask is not finished yet...");
-           log.info(String.valueOf(futureTask.get()));
+           log.info("Numbers active tasks=" + futureTask.get());
         }
         threadpool.shutdown();
-    }
+    }*/
 
     public long returnMaxLongIdFromDataBase() {
         Iterable<Task> taskIterable = taskRepository.findAll();
@@ -95,7 +96,8 @@ public class StringGeneratorFacade {
         }
         return list;
     }
-     //@Async
+    @Scheduled(fixedRate = 10000)
+     @Async
     public void finalGenerateStringsListTasksWithAsync() throws FileWriterException {
 
         Task optionalTask = taskRepository.findFirstByTaskStatus(TaskStatus.WAITING).orElse(null);

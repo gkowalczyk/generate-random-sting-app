@@ -34,7 +34,7 @@ public class TaskController {
     }
 
     @PostMapping
-    public ResponseEntity<Task> addTask(@RequestBody @Nullable Task task) throws PermutationException {
+    public ResponseEntity<Task> addTask(@RequestBody Task task) throws PermutationException {
         return ResponseEntity.ok(taskService.addTask(task));
     }
 }
