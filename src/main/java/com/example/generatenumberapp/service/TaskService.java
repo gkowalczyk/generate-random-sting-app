@@ -40,7 +40,7 @@ public class TaskService {
         if (CalculateCombinations.howManyCombinations(task.getCharStrings().length()) < task.getAmount()) {
             throw new PermutationException("GlobalHttpErrorHandler");
         }
-        task.setTaskStatus(TaskStatus.WAITING);
+        task.setTaskStatus(TaskStatus.STARTING);
         taskRepository.save(task);
         return task;
 

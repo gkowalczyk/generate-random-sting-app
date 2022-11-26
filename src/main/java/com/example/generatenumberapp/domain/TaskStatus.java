@@ -1,7 +1,7 @@
 package com.example.generatenumberapp.domain;
 
 public enum TaskStatus {
-    WAITING,
+    STARTING,
     INPROGRESS,
     FINISHED
 }

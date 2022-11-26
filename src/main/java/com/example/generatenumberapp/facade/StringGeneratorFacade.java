@@ -100,7 +100,7 @@ public class StringGeneratorFacade {
      @Async
     public void finalGenerateStringsListTasksWithAsync() throws FileWriterException {
 
-        Task optionalTask = taskRepository.findFirstByTaskStatus(TaskStatus.WAITING).orElse(null);
+        Task optionalTask = taskRepository.findFirstByTaskStatus(TaskStatus.STARTING).orElse(null);
         if (Objects.nonNull(optionalTask)) {
             log.info("Processing..........................");
             optionalTask.setTaskStatus(TaskStatus.INPROGRESS);
