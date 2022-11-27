@@ -32,9 +32,9 @@ public class StringGeneratorFacade {
     private final Random random = new Random();
 
 
-   /* @Scheduled(fixedRate = 10000)
+    @Scheduled(fixedRate = 10000)
     public void execute() throws ExecutionException, InterruptedException {
-        ExecutorService threadpool = Executors.newCachedThreadPool();
+        ExecutorService threadpool = Executors.newFixedThreadPool(3);
         Future<Long> futureTask;
         futureTask = (Future<Long>) threadpool.submit(() -> {
             try {
@@ -48,7 +48,7 @@ public class StringGeneratorFacade {
            log.info("Numbers active tasks=" + futureTask.get());
         }
         threadpool.shutdown();
-    }*/
+    }
 
     public long returnMaxLongIdFromDataBase() {
         Iterable<Task> taskIterable = taskRepository.findAll();
@@ -96,8 +96,8 @@ public class StringGeneratorFacade {
         }
         return list;
     }
-    @Scheduled(fixedRate = 10000)
-     @Async
+   // @Scheduled(fixedRate = 10000)
+    // @Async
     public void finalGenerateStringsListTasksWithAsync() throws FileWriterException {
 
         Task optionalTask = taskRepository.findFirstByTaskStatus(TaskStatus.STARTING).orElse(null);
