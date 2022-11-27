@@ -35,10 +35,10 @@ public class StringGeneratorFacade {
     @Scheduled(fixedRate = 10000)
     public void execute() throws ExecutionException, InterruptedException {
         ExecutorService threadpool = Executors.newFixedThreadPool(5);
-        Future<Long> futureTask;
-        futureTask = (Future<Long>) threadpool.submit(() -> {
+        Future<String> futureTask = (Future<String>) threadpool.submit(() -> {
             try {
                 finalGenerateStringsListTasksWithAsync();
+
 
             } catch (FileWriterException e) {
                 e.printStackTrace();
@@ -97,8 +97,7 @@ public class StringGeneratorFacade {
         }
         return list;
     }
-   // @Scheduled(fixedRate = 10000)
-    // @Async
+
     public void finalGenerateStringsListTasksWithAsync() throws FileWriterException {
 
         Task optionalTask = taskRepository.findFirstByTaskStatus(TaskStatus.STARTING).orElse(null);
