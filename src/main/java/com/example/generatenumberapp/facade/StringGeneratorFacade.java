@@ -34,11 +34,12 @@ public class StringGeneratorFacade {
 
     @Scheduled(fixedRate = 10000)
     public void execute() throws ExecutionException, InterruptedException {
-        ExecutorService threadpool = Executors.newFixedThreadPool(3);
+        ExecutorService threadpool = Executors.newFixedThreadPool(5);
         Future<Long> futureTask;
         futureTask = (Future<Long>) threadpool.submit(() -> {
             try {
                 finalGenerateStringsListTasksWithAsync();
+
             } catch (FileWriterException e) {
                 e.printStackTrace();
             }
