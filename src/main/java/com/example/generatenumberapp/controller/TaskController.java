@@ -1,6 +1,7 @@
 package com.example.generatenumberapp.controller;
 
 import com.example.generatenumberapp.domain.Task;
+import com.example.generatenumberapp.exception.FileWriterException;
 import com.example.generatenumberapp.exception.TaskNotFoundException;
 import com.example.generatenumberapp.service.TaskService;
 import com.example.generatenumberapp.exception.PermutationException;
@@ -33,7 +34,8 @@ public class TaskController {
     }
 
     @PostMapping
-    public ResponseEntity<Task> addTask(@RequestBody Task task) throws PermutationException {
-        return ResponseEntity.ok(taskService.addTask(task));
+    public ResponseEntity<Void> addTask(@RequestBody Task task) throws PermutationException, FileWriterException, InterruptedException {
+        taskService.addTask(task);
+        return ResponseEntity.ok().build();
     }
 }
