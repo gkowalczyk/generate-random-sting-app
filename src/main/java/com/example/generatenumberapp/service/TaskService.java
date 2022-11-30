@@ -39,7 +39,7 @@ public class TaskService {
         return taskList;
     }
 
-    public void addTask(Task task) throws PermutationException, InterruptedException, FileWriterException {
+    public void addTask(Task task) throws PermutationException {
 
         if (CalculateCombinations.howManyCombinations(task.getCharStrings().length()) < task.getAmount()) {
             throw new PermutationException("GlobalHttpErrorHandler");

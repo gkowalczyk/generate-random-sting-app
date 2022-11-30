@@ -28,16 +28,14 @@ gradle test
 ```
 
 
-###  Run project - Docker (temporary problem creating container, try to run the project as above)
+###  Run project - Docker 
 
 After download repositories:
 
 ```bash
-docker-compose up -d
+docker-compose up 
 ```
-```bash
-java -jar generate-number-app-0.0.1-SNAPSHOT.jar
-```
+
 
 
 ### Postman Endpoints tests:
