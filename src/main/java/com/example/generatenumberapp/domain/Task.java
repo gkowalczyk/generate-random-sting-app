@@ -2,6 +2,7 @@ package com.example.generatenumberapp.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.context.annotation.Profile;
 
 import javax.persistence.*;
 

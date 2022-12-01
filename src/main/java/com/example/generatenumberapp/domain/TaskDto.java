@@ -1,6 +1,8 @@
 package com.example.generatenumberapp.domain;
 
 import lombok.Data;
+import org.springframework.context.annotation.Profile;
+
 
 @Data
 public class TaskDto {

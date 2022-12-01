@@ -6,15 +6,18 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      - localhost
-   # command: sh -c './wait-for localhost:3306 -- npm start'
-  localhost:
-    image: "mysql:8.0"
+      - mysql_db
+    command: sh -c './wait-for mysql_db:3306 -- npm start'
+
+  mysql_db:
+    image: "mysql"
     restart: always
     ports:
       - "3307:3306"
     environment:
-     MYSQL_DATABASE: testdb
-     MYSQL_USER: test
+
+     MYSQL_DATABASE: sa
+     MYSQL_USER: sa
      MYSQL_PASSWORD: Kulamula!
      MYSQL_ROOT_PASSWORD: Kulamula!
+

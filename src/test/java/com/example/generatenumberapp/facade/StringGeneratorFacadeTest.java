@@ -12,6 +12,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.context.annotation.Profile;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;

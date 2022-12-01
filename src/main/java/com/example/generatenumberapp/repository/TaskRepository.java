@@ -2,6 +2,7 @@ package com.example.generatenumberapp.repository;
 
 import com.example.generatenumberapp.domain.Task;
 import com.example.generatenumberapp.domain.TaskStatus;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

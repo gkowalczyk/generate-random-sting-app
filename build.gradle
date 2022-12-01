@@ -24,6 +24,8 @@ jar {
 dependencies {
 
 
+
+    implementation group: 'com.h2database', name: 'h2', version: '2.1.212'
     implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
     implementation 'org.springframework.boot:spring-boot-starter-data-rest'
     implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -32,6 +34,8 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    // https://mvnrepository.com/artifact/com.h2database/h2
+    testImplementation group: 'com.h2database', name: 'h2', version: '2.1.212'
 
     runtimeOnly 'mysql:mysql-connector-java'
 }
