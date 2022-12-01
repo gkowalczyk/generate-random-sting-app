@@ -6,8 +6,8 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      - mysql_db
+      - h2_database
 
-  mysql_db:
+  h2_database:
     image: "buildo/h2database"
     restart: always
