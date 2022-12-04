@@ -5,6 +5,7 @@ services:
 
     ports:
       - "8080:8080"
+    restart: always
     depends_on:
       - database
   database:
