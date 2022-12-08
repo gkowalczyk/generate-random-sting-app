@@ -1,23 +1,21 @@
-version: "3.7"
+version: '3'
 services:
   api:
-    build: .
+    build: ./generate-number-app
     restart: always
     ports:
       - "8080:8080"
     depends_on:
-      - mysql_db
-    command: sh -c './wait-for mysql_db:3306 -- npm start'
+      - database
 
-  mysql_db:
+  database:
+    container_name: "database"
     image: "mysql"
     restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: user
+      MYSQL_DATABASE: generatenumberldb
     ports:
       - "3307:3306"
-    environment:
-
-     MYSQL_DATABASE: sa
-     MYSQL_USER: sa
-     MYSQL_PASSWORD: Kulamula!
-     MYSQL_ROOT_PASSWORD: Kulamula!
 
