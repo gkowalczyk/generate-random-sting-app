@@ -1,10 +1,10 @@
 package com.example.generatenumberapp.facade;
 
-import org.springframework.context.annotation.Profile;
+
 import org.springframework.stereotype.Component;
 
 @Component
-public class CalculateCombinations {
+public class CalculateCombinationsWithoutRepetition {
 
 
     public static long howManyCombinations(long num) {
