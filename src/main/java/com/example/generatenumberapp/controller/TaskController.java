@@ -29,14 +29,15 @@ public class TaskController {
         return ResponseEntity.ok(taskService.getAreRunning());
     }
 
-    @GetMapping("/getall")
+    @GetMapping("/getAll")
     public List<Task> getAllTasks() {
         return taskService.getAllTasksFromDb();
     }
 
-    @PostMapping
+    @PostMapping("/addTask")
     public ResponseEntity<Void> addTask(@RequestBody Task task) throws PermutationException, FileWriterException, InterruptedException {
         taskService.addTask(task);
         return ResponseEntity.ok().build();
     }
+
 }
