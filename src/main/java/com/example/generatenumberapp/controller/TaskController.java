@@ -6,7 +6,6 @@ import com.example.generatenumberapp.exception.TaskNotFoundException;
 import com.example.generatenumberapp.service.TaskService;
 import com.example.generatenumberapp.exception.PermutationException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,4 +39,10 @@ public class TaskController {
         return ResponseEntity.ok().build();
     }
 
+    @DeleteMapping("/deleteAll")
+    public void deleteAll() {
+        taskService.deleteAll();
+    }
 }
+
+

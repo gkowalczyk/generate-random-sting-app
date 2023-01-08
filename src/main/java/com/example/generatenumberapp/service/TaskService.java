@@ -10,6 +10,7 @@ import com.example.generatenumberapp.repository.TaskRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +47,10 @@ public class TaskService {
 
     public List<Task> getAreRunning() throws TaskNotFoundException {
         return taskRepository.findByStatus().orElseThrow(TaskNotFoundException::new);
+    }
+
+    public void deleteAll() {
+        taskRepository.deleteAll();
     }
 }
 
