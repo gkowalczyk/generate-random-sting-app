@@ -1,5 +1,10 @@
-#                              Recruitment task 
-https://docs.google.com/document/d/1iEbP3ZS2FiNZeio8IXXh6NQLLnTCLNBGh8u7aYv9xq8/edit#
+#                             Java Mini-Application: "Generate Random Unique Strings"
+
+This Java mini-application generates a file containing random unique strings, with each string on a separate line. Users can customize the following parameters:
+
+- String Length: Define the minimum and maximum length of the generated strings.
+- Character Set: Specify the characters that should be used to create the strings.
+- Number of Strings: Determine how many strings you want to generate.
 
 **Technology Backend:**
 
@@ -10,6 +15,9 @@ https://docs.google.com/document/d/1iEbP3ZS2FiNZeio8IXXh6NQLLnTCLNBGh8u7aYv9xq8/
 - JUnit5
 - Mockito
 - Lombok
+
+
+
 
 
 ###  Run project (IntelliJ IDEA)
