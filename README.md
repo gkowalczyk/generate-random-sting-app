@@ -6,6 +6,10 @@ This Java mini-application generates a file containing random unique strings, wi
 - Character Set: Specify the characters that should be used to create the strings.
 - Number of Strings: Determine how many strings you want to generate.
 
+App checks how many combinations of strings we can make from provided chars and if the user wants more than we can make the app return a detailed error message. 
+
+
+
 **Technology Backend:**
 
 - Spring Boot
